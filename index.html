@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+
+<style>
+
+
+*{
+    margin: 0px;;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.container{
+    padding: 20px;
+  border-radius: 10px;
+  height: 45%;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+    background-color: aqua;
+}
+
+input{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    
+}
+
+button{
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    transition: padding 0.3s ease;
+  
+}
+
+button:hover{
+    background-color: rgb(184, 199, 212);
+   padding: 6px;
+   
+}
+</style>
+
+
+</head>
+<body >
+    <div class="container">
+    <h1>Guess The Number</h1>
+    <h2>(between 1 to 100)</h2>
+<div class="input-container">
+<input type="number" id="inputNum" placeholder="Enter number" oninput="" min="0" />
+<span id="suggestion"></span>
+</div>
+<div >      <button onclick="guessTheNumber()" >Submit Number</button>
+<button type="reset" onclick="GameReset()">Reset</button>
+</div>    
+    </div>
+
+    <script >
+
+
+let inputNum = document.getElementById("inputNum");
+let suggestion = document.getElementById("suggestion");
+
+let attempt = 0;
+let randomNumber = Math.floor(Math.random() * 100 + 1);
+
+function guessTheNumber() {
+  attempt++;
+  let guess = inputNum.value;
+  if (isNaN(guess) || guess < 1 || guess > 100) {
+    suggestion.innerHTML = "Please enter a valid number between 1 and 100.";
+  } else if (guess > randomNumber) {
+    suggestion.innerHTML = "Try Lower!";
+  } else if (guess < randomNumber) {
+    suggestion.innerHTML = "Try Higher!";
+  } else {
+    suggestion.innerHTML = `Congratulations! You guessed the number in ${attempt} attempts.`;
+  }
+}
+
+function GameReset() {
+  suggestion.innerHTML = "";
+  inputNum.value = "";
+  attempt = 0;
+  randomNumber = Math.floor(Math.random() * 100 + 1);
+}
+
+    </script>
+
+</body>
+</html>
